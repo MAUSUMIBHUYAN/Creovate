@@ -6,13 +6,12 @@
     <title>Animated Robo Front Page</title>
     <style>
         body {
-            margin: 0;
+            background: #0b1727;
             overflow: hidden;
-            background: radial-gradient(circle, #1a1a2e, #16213e, #0f3460);
-            height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
             position: relative;
         }
 
@@ -52,27 +51,27 @@
             100% { opacity: 0.5; filter: drop-shadow(0 0 2px white); }
         }
 
-        .shooting-star {
+        /* .shooting-star {
             position: absolute;
-            width: 100px; /* Longer length */
-            height: 3px; /* Thicker */
-            background: linear-gradient(90deg, transparent, gold 70%); /* Gradient for tail effect */
+            width: 100px; 
+            height: 3px; 
+            background: linear-gradient(90deg, transparent, gold 70%); 
             opacity: 0;
             will-change: transform, opacity;
             animation: shoot 3s infinite;
-            transform-origin: left; /* Ensure the tail grows from the left */
+            transform-origin: left; 
         }
-
+        
         @keyframes shoot {
             0% {
                 opacity: 1;
-                transform: translateX(-100px) translateY(-50px) rotate(45deg); /* Start off-screen */
+                transform: translateX(-100px) translateY(-50px) rotate(45deg); 
             }
             100% {
                 opacity: 0;
-                transform: translateX(100vw) translateY(100vh) rotate(45deg); /* Move diagonally */
+                transform: translateX(100vw) translateY(100vh) rotate(45deg); 
             }
-        }
+        } */
 
         .robo-container {
             position: absolute;
@@ -106,23 +105,23 @@
             }
         }
 
-        function createShootingStar() {
-            const container = document.querySelector('.stars-container');
-            let shootingStar = document.createElement('div');
-            shootingStar.classList.add('shooting-star');
-            shootingStar.style.top = Math.random() * 100 + 'vh';
-            shootingStar.style.left = Math.random() * 100 + 'vw';
-            container.appendChild(shootingStar);
+        // function createShootingStar() {
+        //     const container = document.querySelector('.stars-container');
+        //     let shootingStar = document.createElement('div');
+        //     shootingStar.classList.add('shooting-star');
+        //     shootingStar.style.top = Math.random() * 100 + 'vh';
+        //     shootingStar.style.left = Math.random() * 100 + 'vw';
+        //     container.appendChild(shootingStar);
 
-            // Remove the shooting star after the animation ends
-            shootingStar.addEventListener('animationend', () => {
-                shootingStar.remove();
-            });
-        }
+        //     // Remove the shooting star after the animation ends
+        //     shootingStar.addEventListener('animationend', () => {
+        //         shootingStar.remove();
+        //     });
+        // }
 
         createStars();
 
-        setInterval(createShootingStar, 10000);
+        // setInterval(createShootingStar, 10000);
     </script>
 </body>
 </html>
