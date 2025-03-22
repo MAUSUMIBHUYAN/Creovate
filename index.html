@@ -4,124 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animated Robo Front Page</title>
-    <style>
-        body {
-            background: #0f192d;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            position: relative;
-        }
-
-        .stars-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .star, .star-4-point {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: gold;
-            opacity: 0.8;
-            will-change: transform, opacity;
-            animation: twinkle-glow 2s infinite;
-        }
-
-        .star {
-            clip-path: polygon(
-                50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
-                50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
-            );
-        }
-
-        .star-4-point {
-            clip-path: polygon(
-                50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%,
-                40% 60%, 0% 50%, 40% 40%
-            );
-        }
-
-        @keyframes twinkle-glow {
-            0% { opacity: 0.5; filter: drop-shadow(0 0 2px white); }
-            50% { opacity: 1; filter: drop-shadow(0 0 5px white); }
-            100% { opacity: 0.5; filter: drop-shadow(0 0 2px white); }
-        }
-
-        /* .shooting-star {
-            position: absolute;
-            width: 100px; 
-            height: 3px; 
-            background: linear-gradient(90deg, transparent, gold 70%); 
-            opacity: 0;
-            will-change: transform, opacity;
-            animation: shoot 3s infinite;
-            transform-origin: left; 
-        }
-        
-        @keyframes shoot {
-            0% {
-                opacity: 1;
-                transform: translateX(-100px) translateY(-50px) rotate(45deg); 
-            }
-            100% {
-                opacity: 0;
-                transform: translateX(100vw) translateY(100vh) rotate(45deg); 
-            }
-        } */
-
-        .robo-container {
-            position: absolute;
-            animation: float 3s infinite alternate ease-in-out;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        @keyframes float {
-            from { transform: translate(-50%, 0); }
-            to { transform: translate(-50%, -20px); }
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="frontpage.css">
 </head>
 <body>
+
+    <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#animations">Animations</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
     <div class="stars-container"></div>
     <img src="robo1.png" class="robo-container" alt="Robo" width="200">
+    <button class="explore-btn">Explore</button>
     
-    <script>
-        function createStars() {
-            const container = document.querySelector('.stars-container');
-            for (let i = 0; i < 50; i++) { // Reduced number of stars
-                let star = document.createElement('div');
-                star.classList.add(Math.random() > 0.5 ? 'star' : 'star-4-point');
-                star.style.top = Math.random() * 100 + 'vh';
-                star.style.left = Math.random() * 100 + 'vw';
-                star.style.width = (Math.random() * 8 + 5) + 'px';
-                star.style.height = star.style.width;
-                star.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                container.appendChild(star);
-            }
-        }
-
-        // function createShootingStar() {
-        //     const container = document.querySelector('.stars-container');
-        //     let shootingStar = document.createElement('div');
-        //     shootingStar.classList.add('shooting-star');
-        //     shootingStar.style.top = Math.random() * 100 + 'vh';
-        //     shootingStar.style.left = Math.random() * 100 + 'vw';
-        //     container.appendChild(shootingStar);
-
-        //     // Remove the shooting star after the animation ends
-        //     shootingStar.addEventListener('animationend', () => {
-        //         shootingStar.remove();
-        //     });
-        // }
-
-        createStars();
-
-        // setInterval(createShootingStar, 10000);
-    </script>
+    <script src="frontpage.js"></script>
 </body>
 </html>
