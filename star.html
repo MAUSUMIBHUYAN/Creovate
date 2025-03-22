@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Star</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0a0a0a;
+        }
+
+        .star-clip {
+            width: 100px;
+            height: 100px;
+            background-color: gold;
+            clip-path: polygon(
+                50% 0%,
+                61% 35%,
+                98% 35%,
+                68% 57%,
+                79% 91%,
+                50% 70%,
+                21% 91%,
+                32% 57%,
+                2% 35%,
+                39% 35%
+            );
+        }
+        .star-4-point {
+            width: 100px; /* Adjust size as needed */
+            height: 100px; /* Adjust size as needed */
+            background-color: gold; /* Star color */
+            clip-path: polygon(
+                50% 0%,    /* Top point (long and sharp) */
+                60% 40%,   /* Right point (shorter) */
+                100% 50%,  /* Right side midpoint */
+                60% 60%,   /* Right point (shorter) */
+                50% 100%, /* Bottom point (long and sharp) */
+                40% 60%,   /* Left point (shorter) */
+                0% 50%,    /* Left side midpoint */
+                40% 40%    /* Left point (shorter) */
+            );
+        }
+    </style>
+</head>
+<body>
+    <div class="star-clip"></div>
+    <div class="star-4-point"></div>
+</body>
+</html>
