@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Comic Neue", "Comic Sans MS", cursive, sans-serif;
+    font-family: "Comic Sans MS", sans-serif;
 }
 
 body {
@@ -114,11 +114,11 @@ body {
 
 .robo-container {
     position: absolute;
-    top: 29%;
-    animation: float 3s infinite alternate ease-in-out;
     left: 50%;
     transform: translateX(-50%);
+    animation: float 3s infinite alternate ease-in-out;
 }
+
 
 @keyframes float {
     from { transform: translate(-50%, 0); }
@@ -127,7 +127,7 @@ body {
 
 .explore-btn {
     position: absolute;
-    top: 63%;
+    top: 55%;
     left: 50%;
     transform: translateX(-50%);
     padding: 8px 20px;
@@ -165,7 +165,4 @@ body {
         font-size: 14px;
     }
 
-    .explore-btn {
-        top: 50%;
-    }
 }

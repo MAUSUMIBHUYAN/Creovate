@@ -60,18 +60,18 @@ function removeStars() {
     });
     stars = []; 
 }
-
-function positionRobotAboveButton() {
-    const exploreBtn = document.querySelector('.explore-btn');
-    const roboContainer = document.querySelector('.robo-container');
-
-    // Get the position of the Explore button
-    const btnRect = exploreBtn.getBoundingClientRect();
-
-    // Position the robot just above the button
-    roboContainer.style.top = `${btnRect.top - roboContainer.offsetHeight - 20}px`; // 20px gap
+function positionRobo() {
+    const robo = document.querySelector('.robo-container');
+    const button = document.querySelector('.explore-btn');
+    
+    if (robo && button) {
+        let buttonRect = button.getBoundingClientRect();
+        let newTop = buttonRect.top - robo.clientHeight + 30; // Adjust by changing `+10`
+        robo.style.top = `${newTop}px`;
+    }
 }
 
-// Call the function on page load and window resize
-window.addEventListener('load', positionRobotAboveButton);
-window.addEventListener('resize', positionRobotAboveButton);
+// Run once and also adjust on resize
+positionRobo();
+window.addEventListener("resize", positionRobo);
+
