@@ -21,7 +21,7 @@ body {
     left: 0;
     width: 100%;
     padding: 10px 3%;
-    background: transparent; /* Slightly opaque background */
+    background: transparent;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -38,12 +38,12 @@ body {
 }
 
 .logo:hover {
-    color: gold; 
+    color: gold;
 }
 
 .navbar {
     display: flex;
-    gap: 20px; 
+    gap: 20px;
     margin-left: auto;
 }
 
@@ -68,11 +68,11 @@ body {
 }
 
 .navbar a:hover {
-    color: gold; 
+    color: gold;
 }
 
 .navbar a:hover::before {
-    width: 100%; /* Underline effect on hover */
+    width: 100%;
 }
 
 /* Stars and Robo Container */
@@ -147,25 +147,22 @@ body {
     box-shadow: 0 0 15px gold;
 }
 
-/* Responsive Design */
+/* Responsive Design for Mobile Devices */
 @media (max-width: 768px) {
     .header {
-        padding: 15px 5%;
+        padding: 10px 5%;
     }
 
     .logo {
         font-size: 24px;
     }
 
+    .navbar {
+        gap: 10px;
+    }
+
     .navbar a {
-        font-size: 16px;
+        font-size: 14px;
     }
 
-    .robo-container {
-        top: 25%;
-    }
-
-    .explore-btn {
-        top: 60%;
-    }
 }
