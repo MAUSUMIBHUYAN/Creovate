@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Comic Sans MS", sans-serif;
+    font-family: "Comic Neue", "Comic Sans MS", cursive, sans-serif;
 }
 
 body {
@@ -165,4 +165,11 @@ body {
         font-size: 14px;
     }
 
+    .robo-container {
+        top: 20%;
+    }
+
+    .explore-btn {
+        top: 50%;
+    }
 }

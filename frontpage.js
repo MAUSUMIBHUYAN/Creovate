@@ -60,5 +60,3 @@ function removeStars() {
     });
     stars = []; 
 }
-
-
