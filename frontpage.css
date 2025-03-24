@@ -213,7 +213,7 @@ body {
         to { transform: translateY(8px); }
     }
     .welcome-text {
-        font-size: 12vw;
+        font-size: 13vw;
         display: block;
     }
     .button-container {

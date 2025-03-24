@@ -108,7 +108,20 @@ document.addEventListener('DOMContentLoaded', function() {
         createStars();
         setupButtonEffects();
         typeWelcomeText();
+        
+        // Add touch event handler
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
     }
-
-    init();
+    
+    function handleTouchMove(e) {
+        // Only prevent default if we're at the top and pulling down
+        if (window.scrollY === 0 && e.touches[0].clientY > 10) {
+            e.preventDefault();
+        }
+    }
+    
+    // Don't forget to clean up when needed
+    function cleanup() {
+        document.removeEventListener('touchmove', handleTouchMove);
+    }
 });
