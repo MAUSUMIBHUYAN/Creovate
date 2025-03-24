@@ -10,7 +10,6 @@ body {
     background: #0f192d;
     position: relative;
     overflow-x: hidden;  
-    overflow-y: hidden;
     overscroll-behavior-y: contain; 
 }
 
