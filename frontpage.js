@@ -1,16 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Create background stars
+    // Detect mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Create stars with mobile optimization
     function createStars() {
         const container = document.querySelector('.stars-container');
         const fragment = document.createDocumentFragment();
-        const starCount = window.innerWidth < 768 ? 30 : 50;
+        const starCount = isMobile ? 20 : 50;
         
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.classList.add(Math.random() > 0.5 ? 'star' : 'star-4-point');
             star.style.top = Math.random() * 100 + 'vh';
             star.style.left = Math.random() * 100 + 'vw';
-            const size = (Math.random() * 8 + 5);
+            const size = (Math.random() * (isMobile ? 5 : 8) + 3);
             star.style.width = size + 'px';
             star.style.height = size + 'px';
             star.style.animationDuration = (Math.random() * 2 + 1) + 's';
@@ -19,8 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(fragment);
     }
 
-    // Button hover effects
+    // Button effects (desktop only)
     function setupButtonEffects() {
+        if (isMobile) return;
+        
         const buttons = [
             document.querySelector('.explore-btn'),
             document.querySelector('.surprise-btn')
@@ -32,15 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
             let stars = [];
             
             button.addEventListener('mouseenter', () => {
-                // Remove existing stars
-                stars.forEach(star => {
-                    if (star.parentNode) {
-                        star.parentNode.removeChild(star);
-                    }
-                });
+                stars.forEach(star => star.parentNode?.removeChild(star));
                 stars = [];
                 
-                // Create new stars
                 for (let i = 0; i < 5; i++) {
                     const star = document.createElement('div');
                     star.classList.add(Math.random() > 0.5 ? 'star' : 'star-4-point');
@@ -56,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.body.appendChild(star);
                     stars.push(star);
                     
-                    // Animate stars
                     requestAnimationFrame(() => {
                         const angle = Math.random() * Math.PI * 2;
                         const distance = Math.random() * 50 + 20;
@@ -69,18 +67,14 @@ document.addEventListener('DOMContentLoaded', function() {
             button.addEventListener('mouseleave', () => {
                 stars.forEach(star => {
                     star.style.opacity = '0';
-                    setTimeout(() => {
-                        if (star.parentNode) {
-                            star.parentNode.removeChild(star);
-                        }
-                    }, 500);
+                    setTimeout(() => star.parentNode?.removeChild(star), 500);
                 });
                 stars = [];
             });
         });
     }
 
-    // Typing effect for welcome text
+    // Typing animation
     function typeWelcomeText() {
         const element = document.querySelector('.welcome-text');
         if (!element) return;
@@ -92,9 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
         function type() {
             if (i < text.length) {
                 result += text[i] + " ";
-                element.innerHTML = result.trim() + (i === 1 ? "<br>" : ""); // Add line break after "to"
+                element.innerHTML = result.trim() + (i === 1 ? "<br>" : "");
                 i++;
-                setTimeout(type, 150);
+                setTimeout(type, isMobile ? 200 : 150);
             } else {
                 element.style.borderRight = 'none';
             }
@@ -103,12 +97,16 @@ document.addEventListener('DOMContentLoaded', function() {
         type();
     }
 
-    // Initialize everything
+    // Initialize
     function init() {
-        createStars();
-        setupButtonEffects();
-        typeWelcomeText();
+        try {
+            createStars();
+            setupButtonEffects();
+            typeWelcomeText();
+        } catch (error) {
+            console.error('Initialization error:', error);
+        }
     }
 
-    init();
+    setTimeout(init, 100);
 });
