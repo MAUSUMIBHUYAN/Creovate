@@ -121,7 +121,7 @@ body {
 }
 
 .welcome-text {
-    font-size: clamp(16px, 5vw, 28px);
+    font-size: clamp(20px, 7vw, 32px);
     color: gold;
     font-weight: bold;
     white-space: nowrap;
@@ -131,6 +131,9 @@ body {
                textShine 2s infinite alternate;
     margin-bottom: -10px;
     transform: translateY(5px);
+    text-align: center;
+    white-space: normal; /* Allow natural line breaks */
+    line-height: 1.2; /* Better spacing for two lines */
 }
 
 @keyframes blinkCursor {
@@ -208,8 +211,8 @@ body {
         to { transform: translateY(8px); }
     }
     .welcome-text {
-        margin-bottom: -10px;
-        transform: translateY(6px);
+        font-size: clamp(24px, 8vw, 36px); /* Even larger on mobile */
+        white-space: pre-line;
     }
     .button-container {
         margin-top: -15px;
