@@ -211,7 +211,7 @@ body {
         to { transform: translateY(8px); }
     }
     .welcome-text {
-        font-size: 12vw;
+        font-size: 10vw;
         display: block;
         white-space: normal;
     }

@@ -84,24 +84,35 @@ document.addEventListener('DOMContentLoaded', function() {
     function typeWelcomeText() {
         const element = document.querySelector('.welcome-text');
         if (!element) return;
-
-        const text = "Welcome to Creovate! ☆彡".split(" ");
+    
+        const text = ["Welcome to", "Creovate!"]; // Split text correctly
         let i = 0;
-        let result = "";
-
+        let line = 0;
+    
         function type() {
-            if (i < text.length) {
-                result += text[i] + " ";
-                element.innerHTML = result.trim() + (i === 1 ? "<br>" : ""); // Add line break after "to"
-                i++;
-                setTimeout(type, 150);
+            if (line < text.length) {
+                if (i < text[line].length) {
+                    element.innerHTML += text[line].charAt(i);
+                    i++;
+                    setTimeout(type, 150);
+                } else {
+                    if (line === 0) {
+                        element.innerHTML += "<br>"; // Correctly break after "Welcome to"
+                    } else {
+                        element.innerHTML += " ☆彡"; // Add star symbol to "Creovate!"
+                    }
+                    i = 0;
+                    line++;
+                    setTimeout(type, 300);
+                }
             } else {
-                element.style.borderRight = 'none';
+                element.style.borderRight = "none";
             }
         }
-
+    
         type();
     }
+    
 
     // Initialize everything
     function init() {
