@@ -6,6 +6,7 @@
     <title>Creovate Front Page</title>
     <link rel="stylesheet" type="text/css" href="frontpage.css">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="robo1.png" as="image">
 </head>
 <body>
     <header class="header">
@@ -20,12 +21,12 @@
 
     <div class="stars-container"></div>
     <h1 class="welcome-text"></h1>
-    <img src="robo1.png" class="robo-container" alt="Robo" width="200">
+    <img src="robo1.png" class="robo-container" alt="Robo" width="200" loading="lazy">
     <div class="button-container">
         <button class="explore-btn">Explore</button>
         <button class="surprise-btn">Surprise Me!</button>
     </div>
 
-    <script src="frontpage.js"></script>
+    <script src="frontpage.js" defer></script>
 </body>
 </html>
