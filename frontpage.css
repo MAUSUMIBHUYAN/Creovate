@@ -124,7 +124,7 @@ body {
     font-size: clamp(24px, 8vw, 40px);
     color: gold;
     font-weight: bold;
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
     border-right: 3px solid gold;
     animation: blinkCursor 0.8s steps(2, start) infinite, 
@@ -213,7 +213,6 @@ body {
     .welcome-text {
         font-size: 10vw;
         display: block;
-        white-space: normal;
     }
     .button-container {
         margin-top: -15px;
