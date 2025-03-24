@@ -9,8 +9,19 @@ body {
     height: 100vh;
     background: #0f192d;
     position: relative;
-    overflow-x: hidden;  
     overscroll-behavior-y: contain; 
+}
+body {
+    overflow: hidden;
+}
+
+/* Mobile Devices - Allow Pull-to-Refresh */
+@media (hover: none) and (pointer: coarse) {
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 .header {
