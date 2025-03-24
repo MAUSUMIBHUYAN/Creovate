@@ -8,13 +8,10 @@
 body {
     height: 100vh;
     background: #0f192d;
-    display: flex;
     position: relative;
-    flex-direction: column;
     overflow: hidden;
 }
 
-/* Header Styles */
 .header {
     position: fixed;
     top: 0;
@@ -44,7 +41,6 @@ body {
 .navbar {
     display: flex;
     gap: 20px;
-    margin-left: auto;
 }
 
 .navbar a {
@@ -75,7 +71,6 @@ body {
     width: 100%;
 }
 
-/* Stars and Robo Container */
 .stars-container {
     position: absolute;
     width: 100%;
@@ -92,7 +87,7 @@ body {
     opacity: 0.8;
     will-change: transform, opacity;
     animation: twinkle-glow 2s infinite;
-    transform: translateZ(0); /* Force hardware acceleration */
+    transform: translateZ(0);
 }
 
 .star {
@@ -114,31 +109,58 @@ body {
     50% { opacity: 1; filter: drop-shadow(0 0 5px white); }
 }
 
-.robo-container {
+.content-container {
     position: absolute;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateZ(0);
-    animation: float 3s infinite alternate ease-in-out;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome-text {
+    font-size: clamp(16px, 5vw, 28px);
+    color: gold;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid gold;
+    animation: blinkCursor 0.8s steps(2, start) infinite, 
+               textShine 2s infinite alternate;
+    margin-bottom: -10px;
+    transform: translateY(5px);
+}
+
+@keyframes blinkCursor {
+    50% { border-color: transparent; }
+}
+
+@keyframes textShine {
+    0%, 100% { text-shadow: 0 0 5px gold, 0 0 10px rgba(255, 255, 255, 0.5); }
+    50% { text-shadow: 0 0 8px gold, 0 0 11px rgba(255, 255, 255, 0.6); }
+}
+
+.robo-container {
+    width: 200px;
+    height: auto;
+    animation: float 2s infinite alternate ease-in-out;
     will-change: transform;
 }
 
 @keyframes float {
-    from { transform: translate(-50%, 0) translateZ(0); }
-    to { transform: translate(-50%, -40px) translateZ(0); }
+    from { transform: translateY(-10px); }
+    to { transform: translateY(10px); }
 }
 
-/* Button Container */
 .button-container {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translateX(-50%) translateZ(0);
     display: flex;
     gap: min(5vw, 10px);
-    will-change: transform;
+    margin-top: -15px;
+    transform: translateY(-5px);
 }
 
-/* Common button styles */
 .explore-btn,
 .surprise-btn {
     padding: 8px 20px;
@@ -153,6 +175,7 @@ body {
     transform: translateZ(0);
     will-change: transform, box-shadow, background, color;
 }
+
 .surprise-btn {
     padding: 8px 8px;
 }
@@ -164,53 +187,33 @@ body {
     box-shadow: 0 0 15px gold;
 }
 
-/* Welcome Text */
-.welcome-text {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%) translateZ(0);
-    font-size: clamp(16px, 5vw, 28px);
-    color: gold;
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 3px solid gold;
-    animation: blinkCursor 0.8s steps(2, start) infinite, textShine 2s infinite alternate;
-    will-change: transform, text-shadow, border-color;
-}
-
-/* Blinking cursor effect */
-@keyframes blinkCursor {
-    50% { border-color: transparent; }
-}
-
-/* Glowing shine effect around text */
-@keyframes textShine {
-    0%, 100% { text-shadow: 0 0 5px gold, 0 0 10px rgba(255, 255, 255, 0.5); }
-    50% { text-shadow: 0 0 8px gold, 0 0 11px rgba(255, 255, 255, 0.6); }
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
     .header {
         padding: 10px 5%;
     }
-
     .logo {
         font-size: 24px;
     }
-
     .navbar {
         gap: 10px;
     }
-
     .navbar a {
         font-size: 14px;
     }
-
+    .robo-container {
+        width: 150px;
+    }
+    @keyframes float {
+        from { transform: translateY(-8px); }
+        to { transform: translateY(8px); }
+    }
+    .welcome-text {
+        margin-bottom: -12px;
+        transform: translateY(8px);
+    }
     .button-container {
-        gap: 10px;
+        margin-top: -15px;
+        transform: translateY(-8px);
     }
 }
 
@@ -218,5 +221,9 @@ body {
     .welcome-text {
         white-space: normal;
         text-align: center;
+    }
+    .button-container {
+        flex-direction: column;
+        align-items: center;
     }
 }

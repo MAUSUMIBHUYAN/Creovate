@@ -1,18 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Debounce function for resize events
-    function debounce(func, wait = 100) {
-        let timeout;
-        return function(...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
-    }
-
-    // Stars creation in the background
+    // Create background stars
     function createStars() {
         const container = document.querySelector('.stars-container');
         const fragment = document.createDocumentFragment();
-        const starCount = window.innerWidth < 768 ? 30 : 50; // Fewer stars on mobile
+        const starCount = window.innerWidth < 768 ? 30 : 50;
         
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
@@ -28,115 +19,93 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(fragment);
     }
 
-    // Create button hover effect
-    function createButtonEffect(button, starsArray) {
-        const createStars = () => {
-            removeStars(starsArray);
-            const fragment = document.createDocumentFragment();
+    // Button hover effects
+    function setupButtonEffects() {
+        const buttons = [
+            document.querySelector('.explore-btn'),
+            document.querySelector('.surprise-btn')
+        ];
+        
+        buttons.forEach(button => {
+            if (!button) return;
             
-            for (let i = 0; i < 5; i++) {
-                const star = document.createElement('div');
-                star.classList.add(Math.random() > 0.5 ? 'star' : 'star-4-point');
-                
-                const buttonRect = button.getBoundingClientRect();
-                const startX = Math.random() * buttonRect.width + buttonRect.left;
-                const startY = Math.random() * buttonRect.height + buttonRect.top;
-                
-                star.style.position = 'fixed';
-                star.style.left = `${startX}px`;
-                star.style.top = `${startY}px`;
-                star.style.opacity = '0';
-                star.style.transition = 'opacity 0.5s, transform 0.5s';
-                star.style.pointerEvents = 'none';
-                
-                fragment.appendChild(star);
-                starsArray.push(star);
-                
-                requestAnimationFrame(() => {
-                    const angle = Math.random() * 2 * Math.PI;
-                    const distance = Math.random() * 50 + 20;
-                    star.style.transform = `rotate(45deg) translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
-                    star.style.opacity = '1';
+            let stars = [];
+            
+            button.addEventListener('mouseenter', () => {
+                // Remove existing stars
+                stars.forEach(star => {
+                    if (star.parentNode) {
+                        star.parentNode.removeChild(star);
+                    }
                 });
-            }
-            
-            document.body.appendChild(fragment);
-        };
-        
-        const handleMouseEnter = () => {
-            createStars();
-        };
-        
-        const handleMouseLeave = () => {
-            removeStars(starsArray);
-        };
-        
-        button.addEventListener('mouseenter', handleMouseEnter);
-        button.addEventListener('mouseleave', handleMouseLeave);
-        
-        // Cleanup function
-        return () => {
-            button.removeEventListener('mouseenter', handleMouseEnter);
-            button.removeEventListener('mouseleave', handleMouseLeave);
-            removeStars(starsArray);
-        };
-    }
-
-    function removeStars(starsArray) {
-        starsArray.forEach(star => {
-            star.style.opacity = '0';
-            setTimeout(() => {
-                if (star.parentNode) {
-                    star.parentNode.removeChild(star);
+                stars = [];
+                
+                // Create new stars
+                for (let i = 0; i < 5; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add(Math.random() > 0.5 ? 'star' : 'star-4-point');
+                    
+                    const rect = button.getBoundingClientRect();
+                    star.style.position = 'fixed';
+                    star.style.left = `${Math.random() * rect.width + rect.left}px`;
+                    star.style.top = `${Math.random() * rect.height + rect.top}px`;
+                    star.style.opacity = '0';
+                    star.style.transition = 'all 0.5s ease-out';
+                    star.style.pointerEvents = 'none';
+                    
+                    document.body.appendChild(star);
+                    stars.push(star);
+                    
+                    // Animate stars
+                    requestAnimationFrame(() => {
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = Math.random() * 50 + 20;
+                        star.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+                        star.style.opacity = '1';
+                    });
                 }
-            }, 500);
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                stars.forEach(star => {
+                    star.style.opacity = '0';
+                    setTimeout(() => {
+                        if (star.parentNode) {
+                            star.parentNode.removeChild(star);
+                        }
+                    }, 500);
+                });
+                stars = [];
+            });
         });
-        starsArray.length = 0;
     }
 
-    function positionRobo() {
-        const robo = document.querySelector('.robo-container');
-        const button = document.querySelector('.explore-btn');
+    // Typing effect for welcome text
+    function typeWelcomeText() {
+        const element = document.querySelector('.welcome-text');
+        if (!element) return;
         
-        if (robo && button) {
-            const buttonRect = button.getBoundingClientRect();
-            const newTop = buttonRect.top - robo.clientHeight + 33;
-            robo.style.top = `${newTop}px`;
-        }
-    }
-
-    function typeEffect(element, text, speed, callback) {
+        const text = "Welcome to Creovate! ☆彡";
         let i = 0;
-        function typing() {
+        
+        function type() {
             if (i < text.length) {
                 element.textContent += text.charAt(i);
                 i++;
-                setTimeout(typing, speed);
+                setTimeout(type, 150);
             } else {
                 element.style.borderRight = 'none';
-                if (callback) callback();
             }
         }
-        typing();
+        
+        type();
     }
 
     // Initialize everything
     function init() {
         createStars();
-        
-        const exploreBtn = document.querySelector('.explore-btn');
-        const surpriseBtn = document.querySelector('.surprise-btn');
-        const exploreStars = [];
-        const surpriseStars = [];
-        
-        createButtonEffect(exploreBtn, exploreStars);
-        createButtonEffect(surpriseBtn, surpriseStars);
-        
-        positionRobo();
-        window.addEventListener('resize', debounce(positionRobo));
-        
-        const welcomeText = document.querySelector('.welcome-text');
-        typeEffect(welcomeText, 'Welcome to Creovate! ☆彡', 150);
+        setupButtonEffects();
+        typeWelcomeText();
     }
 
     init();
