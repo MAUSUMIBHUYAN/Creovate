@@ -9,7 +9,9 @@ body {
     height: 100vh;
     background: #0f192d;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;  
+    overflow-y: hidden;
+    overscroll-behavior-y: contain; 
 }
 
 .header {
@@ -211,7 +213,7 @@ body {
         to { transform: translateY(8px); }
     }
     .welcome-text {
-        font-size: 15vw;
+        font-size: 12vw;
         display: block;
     }
     .button-container {
