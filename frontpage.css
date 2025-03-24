@@ -132,7 +132,7 @@ body {
     margin-bottom: -10px;
     transform: translateY(5px);
     text-align: center;
-    white-space: normal; /* Allow natural line breaks */
+    white-space: normal; 
     line-height: 1.2; /* Better spacing for two lines */
 }
 
@@ -211,7 +211,7 @@ body {
         to { transform: translateY(8px); }
     }
     .welcome-text {
-        font-size: 10vw;
+        font-size: 20vw;
         display: block;
     }
     .button-container {
