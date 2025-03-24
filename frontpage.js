@@ -84,20 +84,22 @@ document.addEventListener('DOMContentLoaded', function() {
     function typeWelcomeText() {
         const element = document.querySelector('.welcome-text');
         if (!element) return;
-        
-        const text = "Welcome to Creovate! ☆彡";
+
+        const text = "Welcome to Creovate! ☆彡".split(" ");
         let i = 0;
-        
+        let result = "";
+
         function type() {
             if (i < text.length) {
-                element.textContent += text.charAt(i);
+                result += text[i] + " ";
+                element.innerHTML = result.trim() + (i === 1 ? "<br>" : ""); // Add line break after "to"
                 i++;
                 setTimeout(type, 150);
             } else {
                 element.style.borderRight = 'none';
             }
         }
-        
+
         type();
     }
 
