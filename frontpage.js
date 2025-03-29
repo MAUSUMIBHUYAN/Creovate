@@ -2,20 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // First make sure everything is visible
     document.body.style.opacity = '1';
     
-    // Mobile viewport height fix
-    function setViewportHeight() {
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-    
-    // Initial call
-    setViewportHeight();
-    
-    // Re-calculate on resize
-    window.addEventListener('resize', setViewportHeight);
-    window.addEventListener('orientationchange', setViewportHeight);
-    
-    // Rest of your existing JavaScript code...
+    // Create particles
     function createParticles() {
         const container = document.querySelector('.particles-container');
         container.innerHTML = '';
