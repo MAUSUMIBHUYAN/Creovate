@@ -131,28 +131,30 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    function setActiveNavLink() {
-        const navLinks = document.querySelectorAll('.nav-link');
-        const currentPath = window.location.pathname;
-        
-        navLinks.forEach(link => {
-            const linkPath = link.getAttribute('href');
-            
-            // Check if current path contains link path or vice versa
-            if (currentPath.includes(linkPath) || linkPath.includes(currentPath)) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
-    }
     
     // Initialize everything
     function init() {
         createParticles();
         setupButtonEffects();
         setupMobileMenu();
-        setActiveNavLink()
+        
+        // Animate elements in sequence
+        gsap.from('.logo', {
+            opacity: 0,
+            y: -20,
+            duration: 1,
+            ease: 'power2.out'
+        });
+        
+        gsap.from('.nav-link', {
+            opacity: 0,
+            y: -20,
+            duration: 0.5,
+            stagger: 0.1,
+            delay: 0.5,
+            ease: 'power2.out'
+        });
+        
         gsap.from('.robo-container', {
             opacity: 0,
             x: 100,
@@ -180,8 +182,4 @@ document.addEventListener('DOMContentLoaded', function() {
             createParticles();
         }, 200);
     });
-});
-
-document.querySelector('.explore-btn').addEventListener('click', () => {
-    window.location.href = 'Explore/explore.html';  // adjust path if needed
 });

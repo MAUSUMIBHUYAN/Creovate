@@ -1,0 +1,320 @@
+:root {
+    --primary-color: gold;
+    --secondary-color: cyan;
+    --text-color: rgba(255, 255, 255, 0.9);
+    --bg-color: #0f192d;
+    --card-bg: rgba(15, 25, 45, 0.7);
+    --transition-speed: 0.4s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--bg-color);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Particle Network Background */
+.particle-network {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+}
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: all var(--transition-speed) ease;
+    background: transparent;
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header.scrolled {
+    background: rgba(15, 25, 45, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 15px 5%;
+}
+
+.logo {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Fredoka One', cursive;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    transition: all var(--transition-speed) ease;
+    letter-spacing: 1px;
+}
+
+.logo:hover {
+    color: var(--secondary-color);
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    transform: scale(1.05);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    transition: all var(--transition-speed) ease;
+}
+
+.nav-link {
+    position: relative;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--transition-speed) ease;
+    padding: 5px 0;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width var(--transition-speed) ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-link:hover::before {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.nav-link.active::before {
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    height: 3px;
+    bottom: -5px;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--text-color);
+    transition: all var(--transition-speed) ease;
+}
+
+/* Main Content */
+.main-content {
+    padding-top: 120px;
+    padding-bottom: 60px;
+    min-height: 100vh;
+}
+
+.page-title {
+    text-align: center;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+/* Themes Container */
+.themes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 0 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Theme Section */
+.theme-section {
+    margin-bottom: 20px;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.theme-title {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.theme-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+/* Animation Cards */
+.animation-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.animation-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform var(--transition-speed) ease;
+    will-change: transform;
+}
+
+.animation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7));
+    z-index: 1;
+}
+
+.animation-card:hover {
+    transform: translateY(-10px) scale(1.03);
+}
+
+.animation-card::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    z-index: 2;
+}
+
+.animation-card:hover::after {
+    color: var(--primary-color);
+}
+
+/* Play Icon */
+.animation-card .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 2.5rem;
+    transition: all var(--transition-speed) ease;
+    z-index: 2;
+    opacity: 0;
+}
+
+.animation-card:hover .play-icon {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .navbar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(15, 25, 45, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        transition: all 0.5s ease;
+    }
+    
+    .navbar.active {
+        right: 0;
+    }
+    
+    .hamburger {
+        display: block;
+    }
+    
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .animation-row {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+    }
+    
+    .main-content {
+        padding-top: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .animation-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .navbar {
+        width: 80%;
+    }
+}

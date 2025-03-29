@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glowing Cross Loop</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            overflow: hidden;
+        }
+        .cross-container {
+            position: relative;
+            width: 240px;
+            height: 360px;
+        }
+        .cross {
+            position: absolute;
+            background-color: transparent;
+            border: 4px solid rgba(255, 0, 0, 1);
+            box-shadow: 0 0 40px rgba(255, 0, 0, 1);
+        }
+        .vertical {
+            width: 40px;
+            height: 0;
+            left: 100px;
+            bottom: 0;
+        }
+        .horizontal {
+            width: 0;
+            height: 40px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            top: 100px;
+        }
+        .glow {
+            position: absolute;
+            width: 400px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,0,1) 0%, rgba(255,140,0,0.8) 40%, rgba(0,0,0,0) 90%);
+            opacity: 0;
+            left: -80px;
+            top: -80px;
+            filter: blur(40px);
+        }
+    </style>
+</head>
+<body>
+    <div class="cross-container">
+        <div class="cross vertical"></div>
+        <div class="cross horizontal"></div>
+        <div class="glow"></div>
+    </div>
+    <script>
+        function animateCross() {
+            const vertical = document.querySelector('.vertical');
+            const horizontal = document.querySelector('.horizontal');
+            const glow = document.querySelector('.glow');
+
+            vertical.style.height = '0px';
+            horizontal.style.width = '0px';
+            glow.style.opacity = '0';
+            glow.style.transform = 'scale(1)';
+            vertical.style.backgroundColor = 'transparent';
+            horizontal.style.backgroundColor = 'transparent';
+            vertical.style.border = '4px solid rgba(255, 0, 0, 1)';
+            horizontal.style.border = '4px solid rgba(255, 0, 0, 1)';
+            vertical.style.boxShadow = '0 0 40px rgba(255, 0, 0, 1)';
+            horizontal.style.boxShadow = '0 0 40px rgba(255, 0, 0, 1)';
+            
+            setTimeout(() => {
+                vertical.style.transition = 'height 2s';
+                horizontal.style.transition = 'width 2s';
+                vertical.style.height = '360px';
+                horizontal.style.width = '240px';
+            }, 100);
+            
+            setTimeout(() => {
+                vertical.style.transition = 'background-color 1s, box-shadow 1s';
+                horizontal.style.transition = 'background-color 1s, box-shadow 1s';
+                vertical.style.backgroundColor = 'white';
+                horizontal.style.backgroundColor = 'white';
+                vertical.style.border = 'none';
+                horizontal.style.border = 'none';
+                vertical.style.boxShadow = '0 0 80px rgba(255,255,255,1)';
+                horizontal.style.boxShadow = '0 0 80px rgba(255,255,255,1)';
+            }, 3000);
+            
+            setTimeout(() => {
+                glow.style.transition = 'opacity 2s, transform 2s';
+                glow.style.opacity = '1';
+                glow.style.transform = 'scale(1.2)';
+            }, 4000);
+            
+            setTimeout(() => {
+                vertical.style.transition = 'none';
+                horizontal.style.transition = 'none';
+                glow.style.transition = 'none';
+                animateCross();
+            }, 8000);
+        }
+
+        animateCross();
+    </script>
+</body>
+</html>

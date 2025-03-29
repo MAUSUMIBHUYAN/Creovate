@@ -1,0 +1,40 @@
+Declares an HTML document with UTF-8 encoding.
+The <meta viewport> tag ensures the page is responsive on mobile devices.
+
+//body
+Removes margins for a full-screen effect.
+Hides overflow to prevent scrollbars.
+Sets a soft pink background (#fce4ec), resembling cherry blossom season.
+
+//flower
+.flower class styles each flower.
+position: absolute; allows flowers to be placed freely.
+background-image: url('flower.png'); sets the cherry blossom image.
+background-size: contain; ensures the image fits within the div.
+opacity: 0.8; makes flowers slightly transparent for a soft effect.
+pointer-events: none; ensures the flowers don’t interfere with user interactions.
+
+//js
+Creates a new <div> for the flower.
+Assigns the .flower class.
+Appends it to the body so it appears on the screen.
+
+startPos: Random horizontal position (anywhere across the screen width).
+duration: Random fall duration between 3 to 8 seconds (Math.random() * 5 + 3).
+size: Random flower size between 40px to 80px (Math.random() * 40 + 40).
+
+Sets the randomized horizontal position and size for each flower.
+
+Animation Steps:
+
+Starts slightly above the screen (-10vh).
+Falls down past the screen (100vh).
+Rotates randomly while falling (Math.random() * 360 and 720).
+Fades out (opacity: 0).
+duration * 1000: Converts the duration into milliseconds.
+
+easing: "linear": Ensures a smooth, consistent falling motion.
+
+.onfinish = () => flower.remove();: Removes flowers after they disappear to avoid memory overload.
+
+Calls createFlower() every 200 milliseconds to generate a new flower.
