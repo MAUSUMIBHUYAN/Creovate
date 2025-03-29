@@ -20,6 +20,7 @@ html {
 
 body {
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     background: linear-gradient(135deg, var(--dark-bg) 0%, #1a2a42 100%);
     position: relative;
     overflow-x: hidden;
