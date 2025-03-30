@@ -5,7 +5,6 @@ const animations = [
     { name: "Shadow Effect Button", folder: "shadow_effect_button", theme: "UI Effects" },
     { name: "Text Animation", folder: "text_animation", theme: "UI Effects" },
     { name: "Realistic Water Effect", folder: "water_ripple_effect", theme: "UI Effects" },
-    { name: "Kingfisher Apple", folder: "kingfisher_apple", theme: "Creative" },
     { name: "Hovering Button", folder: "hovering_button", theme: "UI Effects" }
 ];
 
