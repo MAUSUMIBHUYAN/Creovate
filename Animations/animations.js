@@ -1,4 +1,5 @@
 const animations = [
+    { name: "Glowing Squares Dance", folder: "squares_rotation" },
     { name: "Cherry Blossom", folder: "cherry_blossom" },
     { name: "Sleeping Moon", folder: "sleeping_moon" },
     { name: "Cross", folder: "cross" },

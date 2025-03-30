@@ -1,11 +1,12 @@
 const animations = [
+    { name: "Glowing Squares Dance", folder: "squares_rotation",theme: "3D" },
     { name: "Cherry Blossom", folder: "cherry_blossom", theme: "Nature" },
     { name: "Sleeping Moon", folder: "sleeping_moon", theme: "Nature" },
     { name: "Cross", folder: "cross", theme: "Symbolic" },
-    { name: "Shadow Effect Button", folder: "shadow_effect_button", theme: "UI Effects" },
-    { name: "Text Animation", folder: "text_animation", theme: "UI Effects" },
+    { name: "Shadow Effect Button", folder: "shadow_effect_button", theme: "Buttons" },
+    { name: "Text Animation", folder: "text_animation", theme: "Text Effects" },
     { name: "Realistic Water Effect", folder: "water_ripple_effect", theme: "UI Effects" },
-    { name: "Hovering Button", folder: "hovering_button", theme: "UI Effects" }
+    { name: "Hovering Button", folder: "hovering_button", theme: "Buttons" }
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
