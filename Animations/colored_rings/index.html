@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="theme-color" content="#0f192d">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+        <title>Neon Colored Rings</title>
+        <style>
+            body {
+                margin: 0;
+                display: grid;
+                place-items: center;
+                height: 100vh;
+                background: #090c17;
+            }
+            .ring {
+                position: relative;
+                width: 150px;
+                height: 150px;
+            }
+            .ring i {
+                position: absolute;
+                inset: 0;
+                border: 3px solid transparent;
+                transition: 0.5s;
+                filter: drop-shadow(0 0 8px var(--clr)) drop-shadow(0 0 15px var(--clr));
+            }
+            .ring i:nth-child(1) {
+                border-radius: 36% 26% 63% 37% / 41% 44% 56% 59%;
+                border-color: #00ff2a;
+                animation: animate 6s linear infinite;
+            }
+            .ring i:nth-child(2) {
+                border-radius: 41% 44% 56% 59% / 36% 62% 63% 37%;
+                border-color: #ff007f;
+                animation: animate 4s linear infinite;
+            }
+            .ring i:nth-child(3) {
+                border-radius: 41% 44% 56% 59% / 36% 62% 63% 37%;
+                border-color: #ffeb00;
+                animation: animate2 10s linear infinite;
+            }
+            .ring:hover i {
+                border-width: 6px;
+                filter: drop-shadow(0 0 10px var(--clr)) drop-shadow(0 0 20px var(--clr));
+            }
+            @keyframes animate {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            @keyframes animate2 {
+                0% { transform: rotate(360deg); }
+                100% { transform: rotate(0deg); }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="ring">
+            <i style="--clr:#00ff2a;"></i>
+            <i style="--clr:#ff007f;"></i>
+            <i style="--clr:#ffeb00;"></i>
+        </div>
+    </body>
+</html>

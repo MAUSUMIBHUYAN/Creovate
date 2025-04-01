@@ -1,11 +1,12 @@
 const animations = [
+    { name: "Among Us", folder: "imposter" },
+    { name: "Neon Colored Rings", folder: "colored_rings" },
     { name: "Glowing Squares Dance", folder: "squares_rotation" },
     { name: "Cherry Blossom", folder: "cherry_blossom" },
     { name: "Sleeping Moon", folder: "sleeping_moon" },
     { name: "Cross", folder: "cross" },
     { name: "Shadow Effect Button", folder: "shadow_effect_button" },
     { name: "Text Animation", folder: "text_animation" },
-    { name: "Realistic Water Effect", folder: "water_ripple_effect" },
     { name: "Hovering Button", folder: "hovering_button" }
 ];
 
