@@ -1,4 +1,5 @@
 const animations = [
+    { name: "Waves effect", folder: "waves" },
     { name: "Among Us", folder: "imposter" },
     { name: "Neon Colored Rings", folder: "colored_rings" },
     { name: "Glowing Squares Dance", folder: "squares_rotation" },
@@ -13,7 +14,7 @@ const animations = [
 // Performance constants
 const MAX_PARTICLES = 100;
 const MAX_STARS = 500;
-const PARALLAX_FRAME_DELAY = 32; // ~30fps
+const PARALLAX_FRAME_DELAY = 32; 
 
 document.addEventListener('DOMContentLoaded', function() {
     createStarfield();
