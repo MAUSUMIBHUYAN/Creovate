@@ -16,13 +16,19 @@ document.addEventListener("keydown", (event) => {
 
 let lastTap = 0;
 document.addEventListener("touchend", (event) => {
+    event.preventDefault(); // Prevent default touch behavior
     let currentTime = new Date().getTime();
     let tapLength = currentTime - lastTap;
-    if (tapLength < 300 && tapLength > 0) { // Double-tap detected
+    if (tapLength < 300 && tapLength > 0) {
         toggleFullscreen();
     }
     lastTap = currentTime;
 });
+
+// Prevent any touchmove events that could cause scrolling
+document.addEventListener('touchmove', function(event) {
+    event.preventDefault();
+}, { passive: false });
 
 function createFallingItem(type) {
     const item = document.createElement("div");
@@ -40,6 +46,12 @@ function createFallingItem(type) {
     } else {
         size = Math.random() * 35 + 35;
         imageUrl = 'petals.png';
+    }
+    
+    // Adjust size for mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+        size = size * 0.7; // Scale down for mobile
     }
     
     item.style.left = `${startPos}px`;
@@ -61,5 +73,21 @@ function createFallingItem(type) {
     ).onfinish = () => item.remove();
 }
 
-setInterval(() => createFallingItem("cherry blossom"), 180);
-setInterval(() => createFallingItem("petal"), 80);
+// Adjust intervals based on screen size
+function getInterval() {
+    return window.innerWidth < 768 ? 300 : 180;
+}
+
+setInterval(() => createFallingItem("cherry blossom"), getInterval());
+setInterval(() => createFallingItem("petal"), getInterval() / 2);
+
+// Handle resize
+window.addEventListener('resize', function() {
+    clearInterval(flowerInterval);
+    clearInterval(petalInterval);
+    flowerInterval = setInterval(() => createFallingItem("cherry blossom"), getInterval());
+    petalInterval = setInterval(() => createFallingItem("petal"), getInterval() / 2);
+});
+
+let flowerInterval = setInterval(() => createFallingItem("cherry blossom"), getInterval());
+let petalInterval = setInterval(() => createFallingItem("petal"), getInterval() / 2);
