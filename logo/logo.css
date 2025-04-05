@@ -3,10 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-html {
-    background: linear-gradient(135deg, #0a1122 0%, #1a2a4a 100%);
-}
+
 body {
+    background-color: #1a2a4a;
     background: linear-gradient(135deg, #0a1122 0%, #1a2a4a 100%);
     display: flex;
     justify-content: center;
@@ -18,8 +17,6 @@ body {
     position: relative;
     background-attachment: fixed;
     background-size: cover;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
 }
 
 .home-button {
