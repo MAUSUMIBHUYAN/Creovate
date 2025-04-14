@@ -1,4 +1,5 @@
 const animations = [
+    { name: "Sunset", folder: "sunset"},
     { name: "Rocket spinning", folder: "spinning_rocket" },
     { name: "Waves effect", folder: "waves" },
     { name: "Among Us", folder: "imposter" },

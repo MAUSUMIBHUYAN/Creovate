@@ -1,6 +1,7 @@
 // Animation configuration
 const animationConfig = {
     animations: [
+        { name: "sunset", path: "Animations/sunset/index.html" },
         { name: "Waves effect", path: "Animations/waves/index.html" },
         { name: "Neon Colored Rings", path: "Animations/colored_rings/index.html" },
         { name: "Glowing Squares Dance", folder: "Animations/squares_rotation/index.html" },
