@@ -33,6 +33,8 @@
 
     let particles = [];
     let time = 0;
+    let lastFrame = performance.now();
+
 
     class Particle {
       constructor() {
@@ -123,7 +125,7 @@
               lineGradient.addColorStop(1, `hsla(0, 100%, 70%, ${0.4 * intensity * pulseEffect})`);
 
               ctx.strokeStyle = lineGradient;
-              ctx.lineWidth = 0.5 + intensity * 1.5;
+              ctx.lineWidth = 2 + intensity * 3;
               ctx.stroke();
             }
           }
@@ -138,10 +140,11 @@
       }
     }
 
-    function animate() {
-      time += 0.1;
+    function animate(currentTime) {
+      const delta = (currentTime - lastFrame) / 1000; // seconds
+      lastFrame = currentTime;
+      time += delta;
 
-      // Full canvas clear, no trails
       ctx.fillStyle = 'rgb(0, 0, 0)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -159,7 +162,7 @@
     });
 
     init();
-    animate();
+    requestAnimationFrame(animate);
   </script>
 </body>
 </html>
