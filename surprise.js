@@ -1,10 +1,11 @@
 // Animation configuration
 const animationConfig = {
     animations: [
+        { name: "Pulse Particle ", path: "Animations/particles/index.html" },
         { name: "sunset", path: "Animations/sunset/index.html" },
         { name: "Waves effect", path: "Animations/waves/index.html" },
         { name: "Neon Colored Rings", path: "Animations/colored_rings/index.html" },
-        { name: "Glowing Squares Dance", folder: "Animations/squares_rotation/index.html" },
+        { name: "Glowing Squares Dance", path: "Animations/squares_rotation/index.html" },
         { name: "Among Us", path: "Animations/imposter/index.html" },,
         { name: "Cherry Blossom", path: "Animations/cherry_blossom/index.html" },
         { name: "Sleeping Moon", path: "Animations/sleeping_moon/index.html" },

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neon Pulse Particle Universe</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #000;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particleCanvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const PARTICLE_COUNT = 300;
+    const CONNECTION_THRESHOLD = 0.5;
+    const PARTICLE_SIZE = 1.5;
+    const BASE_SPEED = 3.0;
+    const MAX_CONNECTION_DISTANCE = 100;
+
+    let particles = [];
+    let time = 0;
+
+    class Particle {
+      constructor() {
+        this.reset(true);
+        this.baseHue = 0; // Red glow
+        this.pulseSpeed = 0.01 + Math.random() * 0.02;
+      }
+
+      reset(initial = false) {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.z = initial ? Math.random() * canvas.width : canvas.width;
+        this.size = PARTICLE_SIZE;
+        this.speedZ = BASE_SPEED + Math.random() * 0.5;
+      }
+
+      update() {
+        this.z -= this.speedZ;
+        if (this.z < 0) this.reset();
+
+        this.scale = Math.min(15, canvas.width / this.z);
+        this.sx = (this.x - canvas.width / 2) * (canvas.width / this.z) + canvas.width / 2;
+        this.sy = (this.y - canvas.height / 2) * (canvas.width / this.z) + canvas.height / 2;
+        this.depth = 1 - (this.z / canvas.width);
+        this.pulse = Math.sin(time * this.pulseSpeed) * 0.5 + 0.5;
+      }
+
+      draw() {
+        const glowIntensity = this.depth * (0.7 + this.pulse * 0.3);
+        const glowSize = this.size * this.scale * (2 + this.pulse * 1.5); // smaller glow
+
+        // Core glow
+        const coreGradient = ctx.createRadialGradient(
+            this.sx, this.sy, 0,
+            this.sx, this.sy, glowSize * 0.7
+        );
+        coreGradient.addColorStop(0, `hsla(${this.baseHue}, 100%, 70%, ${0.5 * glowIntensity})`);
+        coreGradient.addColorStop(1, `hsla(${this.baseHue}, 100%, 50%, 0)`);
+
+        ctx.beginPath();
+        ctx.arc(this.sx, this.sy, glowSize * 0.7, 0, Math.PI * 2);
+        ctx.fillStyle = coreGradient;
+        ctx.fill();
+
+        // Outer halo
+        const haloGradient = ctx.createRadialGradient(
+            this.sx, this.sy, glowSize * 0.5,
+            this.sx, this.sy, glowSize
+        );
+        haloGradient.addColorStop(0, `hsla(${this.baseHue}, 100%, 60%, ${0.2 * glowIntensity})`);
+        haloGradient.addColorStop(1, `hsla(${this.baseHue + 10}, 100%, 30%, 0)`);
+
+        ctx.beginPath();
+        ctx.arc(this.sx, this.sy, glowSize, 0, Math.PI * 2);
+        ctx.fillStyle = haloGradient;
+        ctx.fill();
+
+        // Red-hot lava center (bigger and stronger)
+        ctx.beginPath();
+        ctx.arc(this.sx, this.sy, this.size * this.scale * 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${this.baseHue}, 100%, 45%, 1.0)`; // Lava red
+        ctx.fill();
+        }
+
+      connect(particles) {
+        if (this.depth < CONNECTION_THRESHOLD) return;
+
+        for (let other of particles) {
+          if (other !== this && other.depth > CONNECTION_THRESHOLD) {
+            const dx = this.sx - other.sx;
+            const dy = this.sy - other.sy;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < MAX_CONNECTION_DISTANCE * (this.scale + other.scale) / 2) {
+              const intensity = (1 - distance / (MAX_CONNECTION_DISTANCE * (this.scale + other.scale) / 2));
+              const pulseEffect = (this.pulse + other.pulse) / 2;
+
+              ctx.beginPath();
+              ctx.moveTo(this.sx, this.sy);
+              ctx.lineTo(other.sx, other.sy);
+
+              const lineGradient = ctx.createLinearGradient(
+                this.sx, this.sy,
+                other.sx, other.sy
+              );
+              lineGradient.addColorStop(0, `hsla(0, 100%, 70%, ${0.4 * intensity * pulseEffect})`);
+              lineGradient.addColorStop(0.5, `hsla(0, 100%, 60%, ${0.6 * intensity * pulseEffect})`);
+              lineGradient.addColorStop(1, `hsla(0, 100%, 70%, ${0.4 * intensity * pulseEffect})`);
+
+              ctx.strokeStyle = lineGradient;
+              ctx.lineWidth = 0.5 + intensity * 1.5;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+    }
+
+    function init() {
+      particles = [];
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      time += 0.1;
+
+      // Full canvas clear, no trails
+      ctx.fillStyle = 'rgb(0, 0, 0)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      particles.sort((a, b) => b.z - a.z);
+      particles.forEach(p => p.update());
+      particles.forEach(p => p.connect(particles));
+      particles.forEach(p => p.draw());
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    init();
+    animate();
+  </script>
+</body>
+</html>
