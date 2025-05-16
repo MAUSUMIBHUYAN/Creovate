@@ -1,4 +1,5 @@
 const animations = [
+    { name: "Matrix Rain", folder: "matrix"},
     { name: "Pulse Particle", folder: "particles"},
     { name: "Sunset", folder: "sunset"},
     { name: "Rocket spinning", folder: "spinning_rocket" },

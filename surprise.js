@@ -1,6 +1,7 @@
 // Animation configuration
 const animationConfig = {
     animations: [
+        { name: "Matrix Rain", path: "Animations/matrix/index.html"},
         { name: "Pulse Particle ", path: "Animations/particles/index.html" },
         { name: "sunset", path: "Animations/sunset/index.html" },
         { name: "Waves effect", path: "Animations/waves/index.html" },

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"M" Matrix Rain</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            overflow: hidden;
+            font-family: 'Noto Sans', sans-serif;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+    <!-- Load all Indian language fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&family=Noto+Sans+Bengali&family=Noto+Sans+Oriya&family=Noto+Sans+Gujarati&family=Noto+Sans+Telugu&family=Noto+Sans+Tamil&family=Noto+Sans+Malayalam&family=Noto+Sans+Kannada&family=Noto+Sans+Meetei+Mayek&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // "M" characters in all major Indian languages + English
+        const chars = {
+            english: "M",
+            assamese: "ম",      // Bengali script (same as Bengali)
+            bengali: "ম",
+            odia: "ମ",
+            gujarati: "મ",
+            hindi: "म",
+            kannada: "ಮ",
+            kashmiri: "م",      // Arabic script
+            konkani: "म",       // Devanagari script
+            malayalam: "മ",
+            manipuri: "ꯃ",      // Meetei Mayek script
+            marathi: "म",
+            nepali: "म",
+            punjabi: "ਮ",       // Gurmukhi script
+            sanskrit: "म",
+            santali: "ᱢ",      // Ol Chiki script
+            sindhi: "م",        // Arabic script
+            tamil: "ம",
+            telugu: "మ"
+        };
+
+        // Convert to array of characters
+        const allChars = Object.values(chars).join('');
+
+        const fontSize = 24;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0F0';
+            ctx.font = `bold ${fontSize}px "Noto Sans", "Noto Sans Devanagari", "Noto Sans Bengali", "Noto Sans Oriya", "Noto Sans Gujarati", "Noto Sans Telugu", "Noto Sans Tamil", "Noto Sans Malayalam", "Noto Sans Kannada", "Noto Sans Meetei Mayek", monospace`;
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = allChars[Math.floor(Math.random() * allChars.length)];
+                
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>
